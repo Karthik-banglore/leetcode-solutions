@@ -76,4 +76,29 @@ void moveZeroes(vector<int>& nums) {
 - **Space Complexity**: O(1), as we perform the entire operation in-place with constant extra space.
 
 This approach minimizes memory usage and maintains a linear time complexity, making it optimal for this problem.
+### Approach Name: Two-Pointer Technique Using stable_partition
 
+### Intuition: We want to rearrange the elements of the array so that all non-zero elements are placed at the beginning, maintaining their relative order. Zero elements are moved to the end, preserving the relative order among them as well.
+stable_partition is a useful STL algorithm that can partition a container based on a predicate while maintaining relative order.
+
+### Steps:
+		1.	Use the stable_partition function from <algorithm> to rearrange elements in the array.
+	2.	Provide a lambda function as the predicate to check whether an element is non-zero (n != 0).
+	3.	stable_partition ensures that the non-zero elements remain in their original relative order at the start of the array, and the zeroes are moved to the end.
+
+ ### code: 
+ #include <iostream>
+#include <vector>
+#include <algorithm> // For stable_partition
+
+void moveZeroes(std::vector<int>& nums) {
+stable_partition(nums.begin(),nums.end(),[](int n){return n!=0 ;} );
+}
+int main() {
+    std::vector<int> nums = {0, 1, 0, 3, 12};
+    moveZeroes(nums);
+    for (int num : nums) {
+        std::cout << num << " ";
+    }
+    return 0;
+}
